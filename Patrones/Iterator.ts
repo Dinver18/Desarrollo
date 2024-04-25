@@ -23,7 +23,7 @@ class OrdenAlfabeticoIterador implements IteradorInterfaz<string>{
         }
     }
     current(): string {
-        throw new Error("Method not implemented.");
+        return this.collection.getItems()[this.position];
     }
 
     public rewind(): void {
