@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Box_1 = require("./Box");
+var BoxContainer_1 = require("./BoxContainer");
+var FirstBox_1 = require("./FirstBox");
+var LastBox_1 = require("./LastBox");
+var b1 = new Box_1.default(1);
+var b2 = new Box_1.default(2);
+console.log(b1.getValue);
+var list = [];
+var first = new FirstBox_1.FirstBox();
+var last = new LastBox_1.LastBox();
+var container1 = new BoxContainer_1.BoxContainer(first);
+console.log(container1.getCajas);
+container1.arrangeBox(b1);
+container1.arrangeBox(b2);
+console.log(container1.getCajas);

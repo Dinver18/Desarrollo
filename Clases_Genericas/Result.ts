@@ -1,4 +1,4 @@
-class Result<T> {
+export class Result<T> {
     private value: T;
     private _error: Error;
     private _isError: boolean;
@@ -33,8 +33,10 @@ class Result<T> {
     }
 }
   
-  
+class response{}  
   
 let r : Result<number> = Result.makeResult(10);
 console.log(r.getValue());
-  
+
+let r2 : Result<number> = Result.makeError(new Error());
+console.log(r.isError());

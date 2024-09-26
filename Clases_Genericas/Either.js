@@ -1,4 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Either = exports.DomainEvent = void 0;
 //CLASES GENERICAS
+var DomainEvent = /** @class */ (function () {
+    function DomainEvent() {
+        this.ocurredOn = new Date();
+    }
+    Object.defineProperty(DomainEvent.prototype, "OcurredOn", {
+        get: function () {
+            return this.ocurredOn;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(DomainEvent.prototype, "eventName", {
+        get: function () {
+            return this.constructor.name;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return DomainEvent;
+}());
+exports.DomainEvent = DomainEvent;
 var Either = /** @class */ (function () {
     function Either(value, left) {
         this.value = value;
@@ -24,11 +48,12 @@ var Either = /** @class */ (function () {
         return new Either(value, true);
     };
     Either.makeRight = function (value) {
-        return new Either(value, false);
+        return new Either(undefined, false);
     };
     return Either;
 }());
-var e1 = Either.makeLeft(4);
-console.log(e1.getLeft());
-console.log(e1.isLeft());
-console.log(e1.isRight());
+exports.Either = Either;
+var e1 = Either.makeLeft(new Error("Error"));
+var e2 = Either.makeRight();
+//console.log(e1.isLeft())
+//console.log(e1.isRight())

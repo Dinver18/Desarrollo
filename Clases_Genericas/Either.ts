@@ -1,11 +1,28 @@
 //CLASES GENERICAS
-class Either<TLeft, TRight> {
+export abstract class DomainEvent{
+  private ocurredOn: Date
+
+  constructor(){
+    this.ocurredOn = new Date()
+  }
+
+  get OcurredOn(): Date{
+    return this.ocurredOn
+  }
+
+  get eventName(): string{
+    return this.constructor.name
+  }
+}
+export class Either<TLeft, TRight>{
     private readonly value: TLeft | TRight;
     private readonly left: boolean;
+    private readonly code?: number
   
-    private constructor(value: TLeft | TRight, left: boolean) {
+    private constructor(value: TLeft | TRight, left: boolean, code?: number) {
       this.value = value;
       this.left = left;
+      this.code = code
     }
   
     isLeft(): boolean {
@@ -30,12 +47,14 @@ class Either<TLeft, TRight> {
       return new Either<TLeft, TRight>(value, true);
     }
   
-    static makeRight<TLeft, TRight>(value: TRight) {
-      return new Either<TLeft, TRight>(value, false);
+    static makeRight<TLeft, TRight>(value?: TRight,code?: number) {
+      return new Either<TLeft, TRight>(value as TRight,false,code);
     }
+
+    
 }
 
-const e1 = Either.makeLeft<number,undefined>(4)
-console.log(e1.getLeft())
-console.log(e1.isLeft())
-console.log(e1.isRight())
+const e1 = Either.makeLeft<Error,void>(new Error("Error"))
+const e2 = Either.makeRight<Error,void>();
+//console.log(e1.isLeft())
+//console.log(e1.isRight())
