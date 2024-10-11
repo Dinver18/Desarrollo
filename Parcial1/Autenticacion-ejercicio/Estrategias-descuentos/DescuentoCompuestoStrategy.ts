@@ -10,7 +10,6 @@ export class DescuentoCompuestoStrategy implements Strategy{
 
         for(const d of this.estrategias){
             monto_descontado = d.obtenerDescuento(monto_descontado)
-            console.log(monto_descontado)
         }
 
         return monto_descontado

@@ -13,9 +13,9 @@ export class BoxContainer<T>{
     }
 
     arrangeBox(b: Box<T>): void{
-        this.cajas = this.arrenger.add(b,this.cajas)
+        this.arrenger.add(b,this)
     }
-
+        
     setArrenger(arrenger: BoxArrenger<T>){
         this.arrenger = arrenger
     }

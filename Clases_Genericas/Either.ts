@@ -43,18 +43,15 @@ export class Either<TLeft, TRight>{
       return <TRight>this.value;
     }
   
-    static makeLeft<TLeft, TRight>(value: TLeft) {
+    static makeRight<TLeft, TRight>(value: TRight) {
       return new Either<TLeft, TRight>(value, true);
     }
   
-    static makeRight<TLeft, TRight>(value?: TRight,code?: number) {
+    static makeLeft<TLeft, TRight>(value?: TLeft,code?: number) {
       return new Either<TLeft, TRight>(value as TRight,false,code);
     }
 
     
 }
-
-const e1 = Either.makeLeft<Error,void>(new Error("Error"))
-const e2 = Either.makeRight<Error,void>();
 //console.log(e1.isLeft())
 //console.log(e1.isRight())

@@ -13,7 +13,7 @@ let list: Box<number>[] = []
 const first = new FirstBox<number>()
 const last = new LastBox<number>()
 
-const container1 = new BoxContainer<number>(last)
+const container1 = new BoxContainer<number>(first)
 
 console.log(container1.getCajas())
 
