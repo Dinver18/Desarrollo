@@ -8,7 +8,17 @@ export class StatusHandler extends BaseHanlder{
     
     handle(request: Either<Error[], Orden>): Either<Error[], Orden> {
         if(request.isRight()){
-            let orden = request.getRight()
+            const orden = request.getRight()
+
+            if(orden.getStatus() !== Estado.Activo){
+                const error = new Error("Status invalido")
+                this.errores.push(error)
+            }
+
+            let result = super.handlerNext(request)
+
+            return result
+
         }
         return request
     }

@@ -14,12 +14,23 @@ export abstract class BaseHanlder implements Handler<Error[], Orden> {
     abstract handle(request: Either<Error[], Orden>): Either<Error[], Orden>
 
     handlerNext(request: Either<Error[], Orden>): Either<Error[], Orden> {
-        for (let handler of this.handlers) {
-            const resultado = handler.handle(request);
-            if (resultado.isLeft()) {
-                this.errores.push(resultado.getLeft());
+        
+        if (this.handlers.length > 0) {
+            for(const h of this.handlers){
+                const result = h.handle(request);
+                if(result.isLeft()){
+                    let errores = result.getLeft()
+                    for(const e of errores){
+                        this.errores.push(e)
+                    }
+                }
             }
         }
-        return request; 
+
+        if(this.errores.length > 0){
+            return Either.makeLeft(this.errores)
+        }
+
+        return Either.makeRight(request.getRight()); 
     }
 }

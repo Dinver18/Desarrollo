@@ -8,8 +8,8 @@ export enum Estado {
 export class Direccion {
     constructor(
         private direccion: string,
-        private codigo_postal: string,
-        private pais: string
+        private codigo_postal?: string,
+        private pais?: string
     ) { }
 
     // Método para obtener la dirección completa
@@ -18,19 +18,24 @@ export class Direccion {
     }
 
     // Método para obtener el código postal
-    getCodigo(): string {
+    getCodigo() {
+        
+        if(!this.codigo_postal){
+            return null
+        }
+
         return this.codigo_postal;
     }
 
     // Método para obtener el país
-    getPais(): string {
+    getPais(): string | undefined{
         return this.pais;
     }
 }
 
 // Clase Cliente
 export class Cliente {
-    private saldo: string;
+    private saldo: number;
 
     constructor(
         private nombre: string,
@@ -38,7 +43,7 @@ export class Cliente {
         private direccion: Direccion,
         private status: Estado,
         private credito: number,
-        saldo: string
+        saldo: number
     ) {
         this.saldo = saldo;
     }
@@ -57,6 +62,10 @@ export class Cliente {
 
     getDireccion(){
         return this.direccion
+    }
+
+    getSaldo(){
+        return this.saldo
     }
     
 } 

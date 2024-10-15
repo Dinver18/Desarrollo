@@ -1,21 +1,26 @@
 import { Cliente, Direccion, Estado } from "./Cliente";
 
-class Articulo {
-    constructor(private nombre: string, private precio: number) {
+export class Articulo {
+    constructor(private nombre: string, private precio: number, private cantidad: number) {
         this.nombre = nombre
         this.precio = precio
+        this.cantidad = cantidad
     }
 
     // Método para obtener el precio del artículo
     getPrecio(): number {
         return this.precio;
     }
+
+    getCantidad(){
+        return this.cantidad;
+    }
 }
 
 export class Orden {
-    private monto_total: string;
+    private monto_total: number;
 
-    constructor(private items: Articulo[], private cliente: Cliente, monto_total: string) {
+    constructor(private items: Articulo[], private cliente: Cliente, monto_total: number) {
         this.monto_total = monto_total;
         this.cliente = cliente
         this.items = items
@@ -30,7 +35,15 @@ export class Orden {
         return this.cliente.getStatus()
     }
 
-    getAddres(): Direccion{
+    get getAddres(){
         return this.cliente.getDireccion()
+    }
+
+    getClient(): Cliente{
+        return this.cliente
+    }
+
+    getItems(){
+        return this.items
     }
 }
